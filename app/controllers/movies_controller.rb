@@ -9,7 +9,8 @@ class MoviesController < ApplicationController
   def same_director
     @movie = Movie.find params[:id]
     if @movie.director and !@movie.director.empty?
-      @movies = Movie.find_all_by_director(@movie.director)
+      @director = @movie.director
+      @movies = Movie.same_director(@director)
     else
       flash[:notice] = "'#{@movie.title}' has no director info."
       redirect_to movies_path
